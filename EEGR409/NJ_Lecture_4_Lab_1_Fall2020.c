@@ -10,7 +10,7 @@
 
 void main() {
     int i, n, m;
-    n = i = 0;
+    i = 0;
 
     printf("This program computes the sum of integers 1 to N.\n");
     printf("Please enter the value for N: \n");
