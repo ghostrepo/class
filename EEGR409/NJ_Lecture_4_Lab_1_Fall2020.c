@@ -8,18 +8,19 @@
 
 #include <stdio.h>
 
-int main() {
-    int i, n;
-    i = 0;
+void main() {
+    int i, n, m;
+    n = i = 0;
 
     printf("This program computes the sum of integers 1 to N.\n");
     printf("Please enter the value for N: \n");
     scanf("%d", &n);
-    while (i <= n) {
-        n = n + (n-1);
+
+    m = n;
+    while (i < n) {
+        m = m + i;
         i++;
     }
-    printf("The sum is %d", n);
-    
-    return 0;
+
+    printf("The sum is %d", n);  
 }
