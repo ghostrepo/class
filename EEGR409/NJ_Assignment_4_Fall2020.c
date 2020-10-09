@@ -1,6 +1,6 @@
 /* Name: Noah Johnson
    Class: EEGR409.001 - C Programming
-   Assignment 2
+   Assignment 4
    This program calculates loan balance in 1 month iterations.
    https://drive.google.com/drive/u/1/folders/1WBvVVJNSQyjJDzKVG782_Thkz8WAvdNz
 
@@ -47,6 +47,7 @@ void main() {
     bal = loan;
     tot_pay = pay;
     net_int = 0;
+
     while (net_bal <= loan) {     
         ints = (int_rate/1200) * bal;
         bal = bal + ints - pay;
@@ -56,6 +57,7 @@ void main() {
         net_bal = tot_pay - net_int;
         i++;
     }
+
     if (bal != 0) {
         tot_pay = tot_pay - pay + bal;
         pay = bal;
@@ -70,9 +72,4 @@ void main() {
     printf("Total number of payments: \t%d\n", i);
     printf("Total interest paid:      \t$%.2f\n", net_int);
     printf("Total payments:           \t$%.2f\n", tot_pay);
-
-    // Loan Summary-----------------------------------------
-    // Total number of payments:22
-    // Total interest paid:            $112.50
-    // Total payments:                 $2112.50
 }
