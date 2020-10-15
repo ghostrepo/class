@@ -23,35 +23,10 @@ void main() {
 
     // this (for) loop counts and records the frequency of each integer in the data set
     for (j = 0; j < 50; j++) {
-        if (m[j] == 1) {
-            a[0]++;
-        }
-        if (m[j] == 2) {
-            a[1]++;
-        }
-        if (m[j] == 3) {
-            a[2]++;
-        }
-        if (m[j] == 4) {
-            a[3]++;
-        }
-        if (m[j] == 5) {
-            a[4]++;
-        }
-        if (m[j] == 6) {
-            a[5]++;
-        }
-        if (m[j] == 7) {
-            a[6]++;
-        }
-        if (m[j] == 8) {
-            a[7]++;
-        }
-        if (m[j] == 9) {
-            a[8]++;
-        }
-        if (m[j] == 10) {
-            a[9]++;
+        for (int t = 0; t <= 10; t++) {
+            if (m[j] == (t + 1)) {
+                a[t]++;
+            }
         }
     }
 
@@ -72,19 +47,9 @@ void main() {
             d = 0;
             b++;
         }
-
     }
 
     // this loop creates the vertical histogram for the data set
-    // b = 0;
-    // d = 0;
-    // c = 10;
-    // while (b <= 9) {
-    //     if (d < a[b]) {
-    //         printf("%d *\t");
-    //         d++;
-    //     }
-    // }
 
 }
 // 8 1 2 7 10 1 8 8 6 8 1 5 8 7 9 6 1 10 6 8 9 7 7 6 8 6 5 6 10 3 7 1 7 6 5 4 8 5 5 9 7 1 1 3 10 4 6 3 4 4
