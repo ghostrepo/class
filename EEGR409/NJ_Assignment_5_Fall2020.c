@@ -17,7 +17,9 @@ void main() {
         a[c] = 0;
     }
     printf("Paste values here:\n");
-    scanf("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", &m[0], &m[1], &m[2], &m[3], &m[4], &m[5], &m[6], &m[7], &m[8], &m[9], &m[10], &m[11], &m[12], &m[13], &m[14], &m[15], &m[16], &m[17], &m[18], &m[19], &m[20], &m[21], &m[22], &m[23], &m[24], &m[25], &m[26], &m[27], &m[28], &m[29], &m[30], &m[31], &m[32], &m[33], &m[34], &m[35], &m[36], &m[37], &m[38], &m[39], &m[40], &m[41], &m[42], &m[43], &m[44], &m[45], &m[46], &m[47], &m[48], &m[49]);
+    for (int i = 0; i <= 49; i++) {
+        scanf("%d", &m[i]);
+    }
 
     // this (for) loop counts and records the frequency of each integer in the data set
     for (j = 0; j < 50; j++) {
@@ -60,7 +62,7 @@ void main() {
     while (b <= 9) {
         if (d < a[b]) {
             if (d == 0) {
-                printf("\t%d ", b);
+                printf("\t%d ", (b + 1));
             }
             printf("*");
             d++;
@@ -72,6 +74,17 @@ void main() {
         }
 
     }
+
+    // this loop creates the vertical histogram for the data set
+    // b = 0;
+    // d = 0;
+    // c = 10;
+    // while (b <= 9) {
+    //     if (d < a[b]) {
+    //         printf("%d *\t");
+    //         d++;
+    //     }
+    // }
 
 }
 // 8 1 2 7 10 1 8 8 6 8 1 5 8 7 9 6 1 10 6 8 9 7 7 6 8 6 5 6 10 3 7 1 7 6 5 4 8 5 5 9 7 1 1 3 10 4 6 3 4 4
