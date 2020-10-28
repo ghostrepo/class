@@ -50,6 +50,19 @@ void main() {
     }
 
     // this loop creates the vertical histogram for the data set
-
+    while (b <= 9) {
+        if (d < a[b]) {
+            if (d == 0) {
+                printf("\t%d ", (b + 1));
+            }
+            printf("*");
+            d++;
+        }
+        if (d == a[b]) {
+            printf(" (%d)\n", d);
+            d = 0;
+            b++;
+        }
+    }
 }
 // 8 1 2 7 10 1 8 8 6 8 1 5 8 7 9 6 1 10 6 8 9 7 7 6 8 6 5 6 10 3 7 1 7 6 5 4 8 5 5 9 7 1 1 3 10 4 6 3 4 4
