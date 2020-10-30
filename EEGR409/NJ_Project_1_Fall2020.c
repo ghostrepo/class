@@ -66,7 +66,7 @@ int setBins() {
             case 4:
             binCount = 0;
             x = 1;
-            showMenu();
+            // showMenu();
             break; 
 
             default:
@@ -95,7 +95,7 @@ void showGraph(int binCount) {
     char graph;
 
     printf("Display (H)orizontal or (V)ertical graph (extra credit): ");
-    scanf("%c", &graph);
+    scanf("%s", &graph);
     // if (graph == "H" || graph == "h") {
     //     if (binCount == 3) {
             
@@ -121,11 +121,11 @@ void showGraph(int binCount) {
     //     if (binCount == 12) {
 
     //     }   
-    // }
-    // else {
+    // } else {
     //     printf("INVALID INPUT: Please enter \"H\" or \"V\"\n");
     // }
     
+    getchar();
 
 }
 
@@ -144,69 +144,67 @@ void main() {
     printf("\t\tPROJECT 1: Cherry Tree Measurement Catalog System\t\t\n");
     printf("----------------------------------------------------------------------------------");
 
-    int menuChoice, binCount;
-    menuChoice = showMenu();
+    int menuChoice, binCount, esc;
+    esc = 1;
 
+    while (esc == 1) {
+        menuChoice = showMenu();
+        while (menuChoice >= 1 && menuChoice <= 5 ) {
+            if (menuChoice >= 1 && menuChoice <= 5) {
+                switch (menuChoice) {           
+                    case 1: 
+                    binCount = setBins(menuChoice);
+                    switch (binCount) {
+                        case 3:
+                        menuChoice = 0;
+                        // showMenu();
+                        break;
 
-    while (menuChoice >= 1 && menuChoice <= 5 ) {
-        if (menuChoice >= 1 && menuChoice <= 5) {
-            switch (menuChoice) {           
-                case 1: 
-                binCount = setBins(menuChoice);
-                switch (binCount) {
+                        case 6: 
+                        menuChoice = 0;
+                        // showMenu();
+                        break;
+
+                        case 12:
+                        menuChoice = 0;
+                        // showMenu();
+                        break;
+
+                        case 0:
+                        menuChoice = 0;
+                        // showMenu();
+
+                        default:
+                        break;
+                    }
+                    break;
+
+                    case 2:
+                    // binCount = setBins();
+                    calcHist(binCount);
+                    break;
+
                     case 3:
                     menuChoice = 0;
-                    showMenu();
+                    showGraph(binCount);
                     break;
 
-                    case 6: 
+                    case 4: 
+                    expGraph();
+                    break;
+
+                    case 5:
                     menuChoice = 0;
-                    showMenu();
+                    esc = 0;
+                    exitMenu();
                     break;
-
-                    case 12:
-                    menuChoice = 0;
-                    showMenu();
-                    break;
-
-                    case 0:
-                    // menuChoice = 0;
-                    showMenu();
 
                     default:
-                    break;
+                    printf("INVALID CHOICE: Please enter a choice between 1 and 5\n");
                 }
-                break;
-
-                case 2:
-                binCount = setBins();
-                calcHist(binCount);
-                break;
-
-                case 3:
-                showGraph(binCount);
-                break;
-
-                case 4: 
-                expGraph();
-                break;
-
-                case 5:
-                menuChoice = 0;
-                exitMenu();
-                break;
-
-                default:
-                printf("INVALID CHOICE: Please enter a choice between 1 and 5\n");
             }
-            
         }
     }
-    // showMenu();
-    // menuChoice();
-
-    
-    
 }
 
 
