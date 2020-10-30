@@ -93,39 +93,51 @@ void calcHist(int binCount) {
 // function to display the graph
 void showGraph(int binCount) {
     char graph;
+    int i = 0;
+    // int graph;
 
-    printf("Display (H)orizontal or (V)ertical graph (extra credit): ");
-    scanf("%s", &graph);
-    // if (graph == "H" || graph == "h") {
-    //     if (binCount == 3) {
-            
-    //     }
+    // graph = getchar();
 
-    //     if (binCount == 6) {
+    while (i == 0) {
+        printf("Display (H)orizontal or (V)ertical graph (extra credit): ");
+        scanf("%s", &graph);
+        if (graph == 'H' || graph == 'h') {
+            if (binCount == 3) {
+                i = 1;
+                printf("GRAPH 1\n");
+            }
 
-    //     }
+            if (binCount == 6) {
+                i = 1;
+                printf("GRAPH 2\n");
+            }
 
-    //     if (binCount == 12) {
+            if (binCount == 12) {
+                i = 1;
+                printf("GRAPH 3\n");
+            }
+        }
+        if (graph == 'V' || graph == 'v') {
+            if (binCount == 3) {
+                i = 1;
+                printf("GRAPH 4\n");            
+            }
 
-    //     }
-    // }
-    // if (graph == "V" || graph == "v") {
-    //     if (binCount == 3) {
-            
-    //     }
+            if (binCount == 6) {
+                i = 1;
+                printf("GRAPH 5\n");
+            }
 
-    //     if (binCount == 6) {
-
-    //     }
-
-    //     if (binCount == 12) {
-
-    //     }   
-    // } else {
-    //     printf("INVALID INPUT: Please enter \"H\" or \"V\"\n");
-    // }
-    
-    getchar();
+            if (binCount == 12) {
+                i = 1;
+                printf("GRAPH 6\n");
+            }   
+        } 
+        if (graph != 'H' && graph != 'h' && graph != 'V' && graph != 'v') {
+            printf("INVALID INPUT: Please enter \"H\" or \"V\"\n");
+        }
+        // getchar();
+}
 
 }
 
@@ -153,44 +165,44 @@ void main() {
             if (menuChoice >= 1 && menuChoice <= 5) {
                 switch (menuChoice) {           
                     case 1: 
-                    binCount = setBins(menuChoice);
-                    switch (binCount) {
-                        case 3:
-                        menuChoice = 0;
-                        // showMenu();
-                        break;
+                        binCount = setBins(menuChoice);
+                        switch (binCount) {
+                            case 3:
+                            menuChoice = 0;
+                            // showMenu();
+                            break;
 
-                        case 6: 
-                        menuChoice = 0;
-                        // showMenu();
-                        break;
+                            case 6: 
+                            menuChoice = 0;
+                            // showMenu();
+                            break;
 
-                        case 12:
-                        menuChoice = 0;
-                        // showMenu();
-                        break;
+                            case 12:
+                            menuChoice = 0;
+                            // showMenu();
+                            break;
 
-                        case 0:
-                        menuChoice = 0;
-                        // showMenu();
+                            case 0:
+                            menuChoice = 0;
+                            // showMenu();
 
-                        default:
-                        break;
-                    }
+                            default:
+                            break;
+                        }
                     break;
 
                     case 2:
-                    // binCount = setBins();
-                    calcHist(binCount);
+                        // binCount = setBins();
+                        calcHist(binCount);
                     break;
 
                     case 3:
-                    menuChoice = 0;
-                    showGraph(binCount);
+                        showGraph(binCount);
+                        menuChoice = 0;
                     break;
 
                     case 4: 
-                    expGraph();
+                        expGraph();
                     break;
 
                     case 5:
