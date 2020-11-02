@@ -9,14 +9,22 @@
 #include <stdio.h>
 #include <math.h>
 
-int getInput() {
-    int a, b, x;
+double calcHypo(double a, double b) {
+    double hypo = sqrt(pow(a, 2) + pow(b, 2));
+
+    return hypo;
+}
+
+double getInput() {
+    int x;
+    double a, b, hypo;
     x = 0;
 
     printf("Enter the length of the two triangle sides, separated by a space: ");
     scanf("%lf %lf", &a, &b);
+
     while (x == 0) {
-        if (a > 0 || a > 1000000 || b < 0 || b > 1000000) {
+        if (a < 0 || a > 1000000 || b < 0 || b > 1000000) {
             printf("INVALID INPUT\nPlease enter two numbers between 0 and 1,000,000, separated by a space: ");
             scanf("%lf %lf", &a, &b);
         }
@@ -25,19 +33,16 @@ int getInput() {
         }
     }
 
-    return a;
-}
-
-int calcHypo(int a, int b) {
-    int hypo = sqrt(pow(a, 2) + pow(b, 2));
+    hypo = calcHypo(a, b);
 
     return hypo;
 }
 
 void main() {
-    int a, b;
-    a = b = 0;
-    getInput();
-    printf("%d", a);
-    calcHypo(a, b);
+    double hyp;
+
+    hyp = getInput();
+
+    printf("\nOUTPUT\n------\nThe hypotenuse is: %.2f", hyp);
+
 }

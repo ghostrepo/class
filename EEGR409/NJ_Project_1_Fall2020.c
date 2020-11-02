@@ -78,13 +78,153 @@ int setBins() {
 
 }
 
+    /*
+        7.50e+1
+        7.40e+1
+        7.40e+1
+        7.30e+1
+        7.20e+1
+        7.30e+1
+        7.70e+1
+        7.90e+1
+        6.80e+1
+        8.80e+1
+        7.90e+1
+        7.20e+1
+        8.60e+1
+        7.10e+1
+        7.10e+1
+        7.20e+1
+        8.20e+1
+        8.30e+1
+        6.80e+1
+        7.30e+1
+        7.40e+1
+        7.70e+1
+        7.40e+1
+        7.60e+1
+        7.90e+1
+        7.90e+1
+        6.70e+1
+        7.70e+1
+        7.50e+1
+        8.30e+1
+        7.30e+1
+        7.50e+1
+        6.50e+1
+        7.30e+1
+        7.60e+1
+        7.50e+1
+        7.90e+1
+        7.00e+1
+        7.10e+1
+        7.30e+1
+        8.10e+1
+        7.30e+1
+        8.40e+1
+        7.70e+1
+        7.20e+1
+        7.10e+1
+        7.30e+1
+        7.50e+1
+        7.00e+1
+        7.70e+1
+        7.80e+1
+        7.30e+1
+        8.20e+1
+        7.30e+1
+        8.00e+1
+        7.10e+1
+        7.60e+1
+        6.70e+1
+        7.40e+1
+        6.90e+1
+        7.30e+1
+        7.90e+1
+        7.50e+1
+        7.60e+1
+        8.00e+1
+        7.70e+1
+        8.30e+1
+        8.60e+1
+        7.60e+1
+        8.50e+1
+        7.80e+1
+        8.30e+1
+        7.60e+1
+        7.70e+1
+        7.30e+1
+        7.00e+1
+        7.30e+1
+        7.00e+1
+        6.70e+1
+        7.40e+1
+        8.20e+1
+        7.10e+1
+        7.00e+1
+        7.50e+1
+        7.80e+1
+        7.70e+1
+        8.00e+1
+        7.00e+1
+        6.80e+1
+        8.00e+1
+        6.80e+1
+        7.40e+1
+        7.30e+1
+        6.90e+1
+        7.00e+1
+        7.40e+1
+        7.50e+1
+        8.00e+1
+        8.30e+1
+        6.90e+1
+    */
 // function to calculate histogram
 void calcHist(int binCount) {
-    int h, k;
-    float data[100];
+    int j = 0;
+    float h, k, data[100], data_f[100];
 
-    printf("\nMinimum data point: %.2f", data[h]);
-    printf("\nMaximum data point: %.2f", data[k]);
+    printf("Paste values here:\n");
+    for (int i = 0; i <= 99; i++) {
+        scanf("%e", &data[i]);
+    }
+
+    k = 0;
+    h = data[0];
+    while (j < 100) {
+        // find minimum value
+        if (data[j] <= data[j + 1]) {
+            if (h <= data[j] && h <= data[j + 1]) {
+                h = h;
+            } else {
+                h = data[j];
+            }
+        }
+
+        // find maximum value
+        if (data[j] >= data[j + 1]) {
+            if (k >= data[j] && k >= data[j + 1]) {
+                k = k;
+            } else {
+                // h = data[j + 1];
+                k = data[j];
+            }
+        }
+        j++;
+    }
+    printf("\nMinimum data point: %.2e", h);
+    printf("\nMaximum data point: %.2e", k);
+
+
+    // this (for) loop counts and records the frequency of 
+    // for (j = 0; j <= 99; j++) {
+    //     for (int t = 0; t <= 100; t++) {
+    //         if (data[j] == (t + 1)) {
+    //             data_f[t]++;
+    //         }
+    //     }
+    // }
 
 
 
@@ -194,6 +334,7 @@ void main() {
                     case 2:
                         // binCount = setBins();
                         calcHist(binCount);
+                        menuChoice = 0;
                     break;
 
                     case 3:
