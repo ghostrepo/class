@@ -78,6 +78,73 @@ int setBins() {
 
 }
 
+// function to calculate histogram
+float calcHist(int binCount) {
+    int j = 0;
+    float h, k, data[100], range, bin;
+    int data_f[12];
+    for (int i = 0; i < 12; i++) {
+        data_f[i] = 0;
+    }
+
+    printf("Paste values here:\n");
+    for (int i = 0; i <= 99; i++) {
+        scanf("%e", &data[i]);
+    }
+
+    // find minimum and maximum values
+    k = 0;
+    h = data[0];
+    while (j < 100) {
+        if (data[j] <= data[j + 1]) {
+            if (h <= data[j] && h <= data[j + 1]) {
+                h = h;
+            } else {
+                h = data[j];
+            }
+        }
+        if (data[j] >= data[j + 1]) {
+            if (k >= data[j] && k >= data[j + 1]) {
+                k = k;
+            } else {
+                k = data[j];
+            }
+        }
+        j++;
+    }
+    printf("\nMinimum data point: %.2f", h);
+    printf("\nMaximum data point: %.2f\n", k);
+
+    bin = (k - h)/(binCount);
+    range = h;
+    while (range <= k) {
+        for (int i = 0; i < 12; i++) {
+            for (j = 0; j < 100; j++) {
+                if ((data[j] >= (range)) && (data[j] <= (range + bin))) {
+                    data_f[i]++;
+                }
+            }
+            range = range + bin; 
+        }
+    }
+
+    for (int i = 0; i < binCount; i++) {
+        if (h <= k && data_f[i] >= 0) {
+                h = h + bin;
+                printf("%.2f ", h);
+                j = 0;
+                while (j < data_f[i]) {
+                    printf("*");
+                    j++;
+
+                }
+                printf(" (%d)\n", data_f[i]);
+        }
+    }
+
+    return bin;
+}
+void data() {
     /*
         7.50e+1
         7.40e+1
@@ -180,67 +247,19 @@ int setBins() {
         8.30e+1
         6.90e+1
     */
-// function to calculate histogram
-void calcHist(int binCount) {
-    int j = 0;
-    float h, k, data[100], data_f[100];
-
-    printf("Paste values here:\n");
-    for (int i = 0; i <= 99; i++) {
-        scanf("%e", &data[i]);
-    }
-
-    k = 0;
-    h = data[0];
-    while (j < 100) {
-        // find minimum value
-        if (data[j] <= data[j + 1]) {
-            if (h <= data[j] && h <= data[j + 1]) {
-                h = h;
-            } else {
-                h = data[j];
-            }
-        }
-
-        // find maximum value
-        if (data[j] >= data[j + 1]) {
-            if (k >= data[j] && k >= data[j + 1]) {
-                k = k;
-            } else {
-                // h = data[j + 1];
-                k = data[j];
-            }
-        }
-        j++;
-    }
-    printf("\nMinimum data point: %.2e", h);
-    printf("\nMaximum data point: %.2e", k);
-
-
-    // this (for) loop counts and records the frequency of 
-    // for (j = 0; j <= 99; j++) {
-    //     for (int t = 0; t <= 100; t++) {
-    //         if (data[j] == (t + 1)) {
-    //             data_f[t]++;
-    //         }
-    //     }
-    // }
-
-
-
 }
 
 // function to display the graph
-void showGraph(int binCount) {
+void showGraph(int binCount, float bin) {
     char graph;
     int i = 0;
     // int graph;
-
     // graph = getchar();
 
     while (i == 0) {
         printf("Display (H)orizontal or (V)ertical graph (extra credit): ");
         scanf("%s", &graph);
+
         if (graph == 'H' || graph == 'h') {
             if (binCount == 3) {
                 i = 1;
@@ -276,6 +295,10 @@ void showGraph(int binCount) {
         if (graph != 'H' && graph != 'h' && graph != 'V' && graph != 'v') {
             printf("INVALID INPUT: Please enter \"H\" or \"V\"\n");
         }
+
+        printf("\t\tHEIGHT OF BLACK CHERRY TREES\t\t\n");
+        printf("----------------------------------------------------------------------------------\n");
+        
         // getchar();
 }
 
@@ -289,7 +312,6 @@ void expGraph() {
 // function to exit the program
 void exitMenu() {
     getchar();
-
 }
 
 void main() {
@@ -297,6 +319,7 @@ void main() {
     printf("----------------------------------------------------------------------------------");
 
     int menuChoice, binCount, esc;
+    float bin;
     esc = 1;
 
     while (esc == 1) {
@@ -333,12 +356,12 @@ void main() {
 
                     case 2:
                         // binCount = setBins();
-                        calcHist(binCount);
+                        bin = calcHist(binCount);
                         menuChoice = 0;
                     break;
 
                     case 3:
-                        showGraph(binCount);
+                        showGraph(binCount, bin);
                         menuChoice = 0;
                     break;
 
@@ -359,39 +382,3 @@ void main() {
         }
     }
 }
-
-
-// void menuChoice() {
-//     int menuChoice, binCount;
-//     menuChoice = showMenu();
-//     // while (menuChoice >= 1 && menuChoice <= 5 ) {
-//         switch (menuChoice) {           
-//             case 1: 
-//             setBins(menuChoice);
-//             break;
-
-//             case 2:
-//             binCount = setBins();
-//             calcHist(binCount);
-//             break;
-
-//             case 3:
-//             showGraph();
-//             break;
-
-//             case 4: 
-//             expGraph();
-//             break;
-
-//             case 5:
-//             exitMenu();
-//             break;
-
-//             default:
-//             printf("INVALID CHOICE: Please enter a choice between 1 and 5\n");
-//         }
-//     // }
-    // if (menuChoice < 1 || menuChoice > 5) {
-    //     showMenu();
-    // }
-// }
