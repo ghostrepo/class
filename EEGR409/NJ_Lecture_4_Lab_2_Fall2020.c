@@ -1,16 +1,15 @@
-/*
-Write a program that asks the user 
-for an integer number and calculate 
-the number of digits by counting how 
-many times the number is divisible by 10
-Modifications: Make sure the user enters a number (input validation) 
+/*  Write a program that asks the user 
+    for an integer number and calculate 
+    the number of digits by counting how 
+    many times the number is divisible by 10
+    Modifications: Make sure the user enters a number (input validation) 
 */
 /* Name: Noah Johnson
    Class: EEGR409.001 - C Programming
    Lecture 4, Lab 2
-   This program 
-   https://drive.google.com/drive/u/1/folders/1WBvVVJNSQyjJDzKVG782_Thkz8WAvdNz
+   This program .
 
+   https://drive.google.com/drive/u/1/folders/1WBvVVJNSQyjJDzKVG782_Thkz8WAvdNz
 */
 
 #include <stdio.h>

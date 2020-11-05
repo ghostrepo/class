@@ -83,6 +83,7 @@ float calcHist(int binCount) {
     int j = 0;
     float h, k, data[100], range, bin;
     int data_f[12];
+
     for (int i = 0; i < 12; i++) {
         data_f[i] = 0;
     }
