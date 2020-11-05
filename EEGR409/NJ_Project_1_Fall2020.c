@@ -136,7 +136,6 @@ float calcHist(int binCount) {
                 while (j < data_f[i]) {
                     printf("*");
                     j++;
-
                 }
                 printf(" (%d)\n", data_f[i]);
         }
@@ -144,6 +143,7 @@ float calcHist(int binCount) {
 
     return bin;
 }
+
 void data() {
     /*
         7.50e+1
@@ -253,55 +253,31 @@ void data() {
 void showGraph(int binCount, float bin) {
     char graph;
     int i = 0;
-    // int graph;
-    // graph = getchar();
 
     while (i == 0) {
         printf("Display (H)orizontal or (V)ertical graph (extra credit): ");
         scanf("%s", &graph);
 
         if (graph == 'H' || graph == 'h') {
-            if (binCount == 3) {
-                i = 1;
-                printf("GRAPH 1\n");
-            }
+            i = 1;
+            printf("\t\tHEIGHT OF BLACK CHERRY TREES\t\t\n");
+            printf("----------------------------------------------------------------------------------\n");
 
-            if (binCount == 6) {
-                i = 1;
-                printf("GRAPH 2\n");
-            }
 
-            if (binCount == 12) {
-                i = 1;
-                printf("GRAPH 3\n");
-            }
         }
+
         if (graph == 'V' || graph == 'v') {
-            if (binCount == 3) {
-                i = 1;
-                printf("GRAPH 4\n");            
-            }
-
-            if (binCount == 6) {
-                i = 1;
-                printf("GRAPH 5\n");
-            }
-
-            if (binCount == 12) {
-                i = 1;
-                printf("GRAPH 6\n");
-            }   
+            i = 1;
+            printf("\t\tHEIGHT OF BLACK CHERRY TREES\t\t\n");
+            printf("----------------------------------------------------------------------------------\n");
         } 
+
         if (graph != 'H' && graph != 'h' && graph != 'V' && graph != 'v') {
             printf("INVALID INPUT: Please enter \"H\" or \"V\"\n");
         }
 
-        printf("\t\tHEIGHT OF BLACK CHERRY TREES\t\t\n");
-        printf("----------------------------------------------------------------------------------\n");
-        
-        // getchar();
-}
-
+        getchar();
+    }
 }
 
 // function to export histogram file
@@ -332,22 +308,18 @@ void main() {
                         switch (binCount) {
                             case 3:
                             menuChoice = 0;
-                            // showMenu();
                             break;
 
                             case 6: 
                             menuChoice = 0;
-                            // showMenu();
                             break;
 
                             case 12:
                             menuChoice = 0;
-                            // showMenu();
                             break;
 
                             case 0:
                             menuChoice = 0;
-                            // showMenu();
 
                             default:
                             break;
