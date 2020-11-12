@@ -7,13 +7,16 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
-// #include <windows.h>
+// #include <stdlib.h>
 
-FILE *data0, *data1, *data2; 
+FILE *data0, *data1, *data2, *data_out; 
 
 void ReadData(FILE *data, double f_a[]) {
     int j = 0;
+    for (int i = 0; i < 20; i++) {
+        f_a[i] = 0;
+    }
+
     if (data == NULL) {
         printf("ERROR: File not found\n");
     } else {
@@ -22,7 +25,6 @@ void ReadData(FILE *data, double f_a[]) {
         while (fscanf(data, "%lf", &f_a[j]) > 0) {
             j++;
         }
-        printf("ARR Length: %d\n", j);
     }  
 }
 
@@ -31,77 +33,57 @@ int CombineData(double arr0[], double arr1[], double arr2[], double combined[]) 
     i = j = 0;
 
     while (arr0[i] > 0) {
-        if (arr0[i] > 0) {
-            printf("Value %d: %f\n", i, arr0[i]);
-            combined[j] = arr0[i];
-            i++;
-        }
+        combined[j] = arr0[i];
+        i++;
+        j++;
     }
-    printf("1: %d\n", i);
 
-    // i = 0;
-    // while (arr1[i] > 0) {
-    //     combined[j] = arr1[i];
-    //     i++;
-    //     j++;
-    // }
-    // printf("1: %d\n", i);
+    i = 0;
+    while (arr1[i] > 0) {
+        combined[j] = arr1[i];
+        i++;
+        j++;
+    }
 
-    // i = 0;
-    // while (arr2[i] > 0) {
-    //     combined[j] = arr2[i];
-    //     i++;
-    //     j++;
-    // }
-    // printf("1: %d\n", i);
+    i = 0;
+    while (arr2[i] > 0) {
+        combined[j] = arr2[i];
+        i++;
+        j++;
+    }
     
-    // printf("Big ARR Length: %d\n", j);
     return j;
 }
 
-void WriteData() {
-    
+void WriteData(FILE *data_output, double combined[], double t[], int j) {
+    double k = 0;
+    for (int i = 0; i < j; i++) {
+        t[i] = -6 + k;
+        k = k + 0.5;
+    }
+
+    for (int i = 0; i < j; i++) {
+        fprintf(data_output, "%.1f, %f\n", t[i], combined[i]);
+    }
 }
 
 void main() {
-    double x_a[20], y_a[20], z_a[20], a[20];
+    double x_a[20], y_a[20], z_a[20], a[100], t[100];
     int i, j;
 
     data0 = fopen("NJ_A6_data0.txt", "r");
     data1 = fopen("NJ_A6_data1.txt", "r");
     data2 = fopen("NJ_A6_data2.txt", "r");
+    data_out = fopen("combined_data.csv", "r+");
+
     ReadData(data0, x_a);
     ReadData(data1, y_a);
     ReadData(data2, z_a);
     j = CombineData(x_a, y_a, z_a, a);
-
-    i = 0;
-    // while (x_a[i] > 0) {
-    //     printf("%d: %.2f\n", i, x_a[i]);
-    //     i++;
-    // }
-
-    // i = 0;
-    // while (y_a[i] > 0) {
-    //     printf("%d: %.2f\n", i, y_a[i]);
-    //     i++;
-    // }
-
-    // i = 0;
-    // while (z_a[i] > 0) {
-    //     printf("%d: %.2f\n", i, z_a[i]);
-    //     i++;
-    // }
-
-    // for (int k = 0; k <= j; k++) {
-    //     printf("\n%f", a[k]);
-    // }
+    WriteData(data_out, a, t, j);
 
     fclose(data0);
     fclose(data1);
     fclose(data2);
-
-
-
-
+    fclose(data_out);
 }   
