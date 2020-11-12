@@ -1,7 +1,7 @@
 /* Name: Noah Johnson
    Class: EEGR409.001 - C Programming
-   Assignment 4
-   This program calculates loan balance in 1 month iterations.
+   Assignment 5
+   This program creates a histogram for a data set.
 
    https://drive.google.com/drive/u/1/folders/1WBvVVJNSQyjJDzKVG782_Thkz8WAvdNz
 */

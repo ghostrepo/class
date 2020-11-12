@@ -1,13 +1,13 @@
 /* Name: Noah Johnson
    Class: EEGR409.001 - C Programming
-   Lecture 6, Lab 2
+   Lecture 7, Lab 1
    This program prints out a reversed list of numbers entered by the user.
 
    https://drive.google.com/drive/u/1/folders/1WBvVVJNSQyjJDzKVG782_Thkz8WAvdNz
 */
 
 #include <stdio.h>
-#include <math.h>
+#include <windows.h>
 
 void main() {
     double n[10], n_reverse[10], n_0[5], n_1[5];
@@ -20,6 +20,7 @@ void main() {
     printf("\nThe reverse of the numbers you entered are: ");
     for (int i = 0; i < 10; i++) {
         n_reverse[i] = n[9 - i];
+        Sleep(500);
         printf("%.0f ", n_reverse[i]);
     }
 
