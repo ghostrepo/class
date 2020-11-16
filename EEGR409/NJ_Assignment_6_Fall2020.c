@@ -1,19 +1,19 @@
 /* Name: Noah Johnson
    Class: EEGR409.001 - C Programming
    Assignment 6
-   This program.
+   This program reads data from three separate files and
+   combines the files so that they can be plotted in Microsoft Excel.
 
    https://drive.google.com/drive/u/1/folders/1WBvVVJNSQyjJDzKVG782_Thkz8WAvdNz
 */
 
 #include <stdio.h>
-// #include <stdlib.h>
 
 FILE *data0, *data1, *data2, *data_out; 
 
 void ReadData(FILE *data, double f_a[]) {
     int j = 0;
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 100; i++) {
         f_a[i] = 0;
     }
 
@@ -68,7 +68,7 @@ void WriteData(FILE *data_output, double combined[], double t[], int j) {
 }
 
 void main() {
-    double x_a[20], y_a[20], z_a[20], a[100], t[100];
+    double x_a[100], y_a[100], z_a[100], a[100], t[100];
     int i, j;
 
     data0 = fopen("NJ_A6_data0.txt", "r");
