@@ -13,7 +13,7 @@
 
 int data_f, data_f0, data_f1, data_f2, data_f3, data_f4, data_f5, data_f6, data_f7, data_f8, data_f9, data_f10;
 double h, k;
-FILE *data0, *data1, *data2, *data3, *data4;
+FILE *data0;
 
 // function to display the main menu 
 int GetMenuChoice() {
@@ -40,7 +40,6 @@ int GetNumberOfBins() {
     int binNum, binCount;
     int x = 0;
     int t = 0;
-    int *y;
 
     while (x == 0) {
         printf("\n+---------------------------------------+\n");
@@ -106,154 +105,185 @@ int GetNumberOfBins() {
 }
 
 // function to read data
-void LoadData() {
-    
-}
+int ReadData(double data[5][1000]) {
+    int i, j, total, data_amount, bank_amount;
+    total = 0;
+    i = j = 0;
 
-// function to calculate histogram
-double CalculateHistogram(int binCount) {
-    double range, range1, range2, range3, range4, range5, range6, range7, range8, range9, range10, range11, bin, num;
-    data_f = data_f0 = data_f1 = data_f2 = data_f3 = data_f4 = data_f5 = data_f6 = data_f7 = data_f8 = data_f9 = data_f10 = 0;
-    int j, i;
-    j = i = 0;
-
-    data0 = fopen("NJ_Project_1_data.txt", "r");
-    if (data0 == NULL) {
+    FILE *data_file = fopen("NJ_Project_2_data.csv", "r+");
+    if (data_file == NULL) {
         printf("ERROR: File not found\n");
     } else {
-        while (j < 100) {
-            fscanf(data0, "%lf", &num);
+        fscanf(data_file, "%lf,%lf,%lf,%lf,%lf", &data[0][j], &data[1][j], &data[2][j], &data[3][j], &data[4][j]);
+        j++;
+        while (fscanf(data_file, "%lf,%lf,%lf,%lf,%lf", &data[0][j], &data[1][j], &data[2][j], &data[3][j], &data[4][j]) > 0) {
+            j++;
+        }
+    }
+    data_amount = j;
+
+    printf("Number of data values read: 5 banks of %d\n", data_amount);
+
+    fclose(data_file);
+    return data_amount;
+}
+
+int GetMinValue (FILE *data, int total) {
+    int i, j, h; 
+    double num;
+
+    data = fopen("NJ_Project_2_data.txt", "r");
+    if (data == NULL) {
+        printf("ERROR: File not found\n");
+    } else {
+        while (j < total) {
+            fscanf(data, "%lf", &num);
             while (i == 0) {
-                h = k = num;
+                h = num;
                 i++;
             }
-                if (h > num) {
-                    h = num;
-                }
-                if (k < num) {
-                    k = num;
-                }
+            if (h > num) {
+                h = num;
+            }
             j++;
         }
         printf("\nMinimum data point: %.2f", h);
-        printf("\nMaximum data point: %.2f\n", k);
-    }
-    fclose(data0);
-
-    bin = (k - h)/(binCount);
-    data0 = fopen("NJ_Project_1_data.txt", "r+");
-    if (binCount == 3) {
-        range = h;
-        range1 = range + bin;
-        range2 = range1 + bin;
-        range3 = range2 + bin;
-        j = 0;
-
-        while (j < 100) {
-            fscanf(data, "%lf", &num);
-            if (num >= h && num <= range1) {
-                data_f++;
-            }
-            if (num >= range1 && num <= range2) {
-                data_f0++;
-            }
-            if (num >= range2 && num <= k) {
-                data_f1++;
-            }
-            j++;
-        }
     }
 
-    if (binCount == 6) {
-        range = h;
-        range1 = range + bin;
-        range2 = range1 + bin;
-        range3 = range2 + bin;
-        range4 = range3 + bin;
-        range5 = range4 + bin;
-        j = 0;
-
-        while (j < 100) {
-            fscanf(data, "%lf", &num);
-            if (num >= h && num <= range1) {
-                data_f++;
-            }
-            if (num >= range1 && num <= range2) {
-                data_f0++;
-            }
-            if (num >= range2 && num <= range3) {
-                data_f1++;
-            }
-            if (num >= range3 && num <= range4) {
-                data_f2++;
-            }
-            if (num >= range4 && num <= range5) {
-                data_f3++;
-            }
-            if (num >= range5 && num <= k) {
-                data_f4++;
-            }
-            j++;
-        }
-    }
-
-    if (binCount == 12) {
-        range = h;
-        range1 = range + bin;
-        range2 = range1 + bin;
-        range3 = range2 + bin;
-        range4 = range3 + bin;
-        range5 = range4 + bin;
-        range6 = range5 + bin;
-        range7 = range6 + bin;
-        range8 = range7 + bin;
-        range9 = range8 + bin;
-        range10 = range9 + bin;
-        range11 = range10 + bin;
-        j = 0;
-
-        while (j < 100) {
-            fscanf(data, "%lf", &num);
-            if (num >= h && num <= range1) {
-                data_f++;
-            }
-            if (num >= range1 && num <= range2) {
-                data_f0++;
-            }
-            if (num >= range2 && num <= range3) {
-                data_f1++;
-            }
-            if (num >= range3 && num <= range4) {
-                data_f2++;
-            }
-            if (num >= range4 && num <= range5) {
-                data_f3++;
-            }
-            if (num >= range5 && num <= range6) {
-                data_f4++;
-            }
-            if (num >= range6 && num <= range7) {
-                data_f5++;
-            }
-            if (num >= range7 && num <= range8) {
-                data_f6++;
-            }
-            if (num >= range8 && num <= range9) {
-                data_f7++;
-            }
-            if (num >= range9 && num <= range10) {
-                data_f8++;
-            }
-            if (num >= range10 && num <= range11) {
-                data_f9++;
-            }
-            if (num >= range11 && num <= k) {
-                data_f10++;
-            }
-            j++;
-        }
-    }
     fclose(data);
+
+    return h;
+}
+
+int GetMaxValue (FILE *data, int total) {
+    int k, i, j; 
+    double num;
+
+    data = fopen("NJ_Project_2_data.txt", "r");
+    if (data == NULL) {
+        printf("ERROR: File not found\n");
+    } else {
+        while (j < total) {
+            fscanf(data, "%lf", &num);
+            while (i == 0) {
+                k = num;
+                i++;
+            }
+            if (k < num) {
+                k = num;
+            }
+            j++;
+        }
+        printf("\nMaximum data point: %.2f", k);
+    }
+
+    fclose(data);
+    return k;
+}
+
+// function to calculate histogram
+double CalculateHistogram(int binCount, double data[5][1000]) {
+    double bin, range, min, max, data_frequency[5][20];
+    int k, j, i;
+    j = i = 0;
+
+        bin = (max - min)/(binCount);
+        range = min;
+        while (range <= max) {
+            for (int k = 0; k < binCount; k++) {
+                for (j = 0; j < 100; j++) {
+                    if ((data[i][j] >= (range)) && (data[i][j] <= (range + bin))) {
+                        data_frequency[i][k]++;
+                    }
+                }
+                range = range + bin; 
+            // printf("data frequency %d: %d", k + 1, data_frequency[i][k]);
+            }
+        }
+
+    // bin = (k - h)/(binCount);
+    // data0 = fopen("NJ_Project_1_data.txt", "r+");
+    // if (binCount == 3) {
+    //     range = h[i];
+    //     range1 = range + bin;
+    //     range2 = range1 + bin;
+    //     range3 = range2 + bin;
+    //     j = 0;
+
+    //     while (j < 100) {
+    //         fscanf(data0, "%lf", &num);
+    //         if (num >= h && num <= range1) {
+    //             data_f++;
+    //         }
+    //         if (num >= range1 && num <= range2) {
+    //             data_f0++;
+    //         }
+    //         if (num >= range2 && num <= k) {
+    //             data_f1++;
+    //         }
+    //         j++;
+    //     }
+    // }
+
+
+
+    // if (binCount == 12) {
+    //     range = h;
+    //     range1 = range + bin;
+    //     range2 = range1 + bin;
+    //     range3 = range2 + bin;
+    //     range4 = range3 + bin;
+    //     range5 = range4 + bin;
+    //     range6 = range5 + bin;
+    //     range7 = range6 + bin;
+    //     range8 = range7 + bin;
+    //     range9 = range8 + bin;
+    //     range10 = range9 + bin;
+    //     range11 = range10 + bin;
+    //     j = 0;
+
+    //     while (j < 100) {
+    //         fscanf(data, "%lf", &num);
+    //         if (num >= h && num <= range1) {
+    //             data_f++;
+    //         }
+    //         if (num >= range1 && num <= range2) {
+    //             data_f0++;
+    //         }
+    //         if (num >= range2 && num <= range3) {
+    //             data_f1++;
+    //         }
+    //         if (num >= range3 && num <= range4) {
+    //             data_f2++;
+    //         }
+    //         if (num >= range4 && num <= range5) {
+    //             data_f3++;
+    //         }
+    //         if (num >= range5 && num <= range6) {
+    //             data_f4++;
+    //         }
+    //         if (num >= range6 && num <= range7) {
+    //             data_f5++;
+    //         }
+    //         if (num >= range7 && num <= range8) {
+    //             data_f6++;
+    //         }
+    //         if (num >= range8 && num <= range9) {
+    //             data_f7++;
+    //         }
+    //         if (num >= range9 && num <= range10) {
+    //             data_f8++;
+    //         }
+    //         if (num >= range10 && num <= range11) {
+    //             data_f9++;
+    //         }
+    //         if (num >= range11 && num <= k) {
+    //             data_f10++;
+    //         }
+    //         j++;
+    //     }
+    // }
+    fclose(data0);
 
     return bin;
 }
@@ -427,8 +457,8 @@ void main() {
     printf("\t\tPROJECT 2: Cherry Tree Measurement Catalog System\t\t\n");
     printf("----------------------------------------------------------------------------------");
 
-    int menuChoice, binCount, esc;
-    double bin;
+    int menuChoice, binCount, esc, total;
+    double bin, data[5][1000], data_frequency[5][20];
     binCount = 12;
     esc = 1;
 
@@ -534,29 +564,30 @@ void main() {
                     break;
 
                     case 2:
-
+                    total = ReadData(data);
                     menuChoice = 0;
                     break;
 
                     case 3:
+                    DisplayHistogram(binCount, bin);
                     menuChoice = 0;
                     break;
 
                     case 4: 
-                    bin = CalculateHistogram(binCount);
+                    bin = CalculateHistogram(binCount, data);
                     menuChoice = 0;
                     break;
 
                     case 5:
-                    DisplayHistogram(binCount, bin);
+                    // DisplayHistogram(binCount, bin);
                     menuChoice = 0;
                     esc = 0;
                     break;
 
                     case 6:
+                    exitMenu();
                     menuChoice = 0;
                     esc = 0;
-                    exitMenu();
                     break;
 
                     default:
