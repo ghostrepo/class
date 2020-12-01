@@ -15,6 +15,7 @@ int data_f, data_f0, data_f1, data_f2, data_f3, data_f4, data_f5, data_f6, data_
 double h, k;
 FILE *data0;
 
+// WORKING
 // function to display the main menu 
 int GetMenuChoice() {
     int x, menuChoice, binCount;
@@ -35,6 +36,7 @@ int GetMenuChoice() {
     return menuChoice;
 }
 
+// WORKING
 // function to set number of bins in histogram
 int GetNumberOfBins() {
     int binNum, binCount;
@@ -104,6 +106,7 @@ int GetNumberOfBins() {
     return binCount;
 }
 
+// WORKING
 void WriteData(double data[5][1000], int total) {
     FILE *data_output;
     int i = 0;
@@ -119,6 +122,7 @@ void WriteData(double data[5][1000], int total) {
     fclose(data_output);
 }
 
+// WORKING
 // function to read data
 int ReadData(double data[5][1000]) {
     int i, j, total, data_amount, bank_amount;
@@ -280,6 +284,7 @@ double CalculateHistogram(int binCount, double data[5][1000]) {
     return bin;
 }
 
+// WORKING
 void DisplayData(double data[5][1000], int total) {    
     int j, k, t, counter;
     int i = 1;
@@ -503,6 +508,7 @@ void DisplayHistogram(int binCount, double bin) {
 void expGraph() {
 }
  
+// WORKING
 // function to exit the program
 void exitMenu() {
     getchar();
