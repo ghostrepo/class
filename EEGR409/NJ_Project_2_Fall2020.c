@@ -281,16 +281,16 @@ double CalculateHistogram(int binCount, double data[5][1000]) {
 }
 
 void DisplayData(double data[5][1000], int total) {    
+    int j, k, t, counter;
     int i = 1;
-    int j, k, t;
-    j = k = t = 0;
-    int counter = 0;
     char page;
+    j = k = t = counter = 0;
 
     printf("\n \t|     Bank 1     |     Bank 2     |     Bank 3     |     Bank 4     |     Bank 5     |\n");
     printf(" \t| -------------- | -------------- | -------------- | -------------- | -------------- |\n");
     while (counter == 0) {
-        for (int i = 1; i <= 12; i++) {
+        printf("\n");
+        for (i = 1; i <= 12; i++) {
             t = 0;
             printf(" %d\t| %.3f \t | %.3f \t  | %.3f \t   | %.3f \t    | %.3f \t     |\n", j + 1, data[0][j], data[1][j], data[2][j], data[3][j], data[4][j]);
             j++;
@@ -627,6 +627,7 @@ void main() {
                     case 3:
                     if (total == 0) {
                         printf("ERROR: MUST LOAD DATA\n");
+                        menuChoice = 0;
                     } else {
                         DisplayData(data, total);
                         menuChoice = 0;
