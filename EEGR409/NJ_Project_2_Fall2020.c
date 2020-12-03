@@ -106,24 +106,24 @@ int GetNumberOfBins() {
     return binCount;
 }
 
+// // WORKING
+// void WriteData(double data[5][1000], int total) {
+//     FILE *data_output;
+//     int i = 0;
+
+//     data_output = fopen("NJ_Project_data_out.txt", "r+");
+
+//     for (int i = 0; i < 5; i++) {
+//         for (int j = 0; j < total; j++) {
+//             fprintf(data_output, "%f\n", data[i][j]);
+//         }
+//     }
+
+//     fclose(data_output);
+// }
+
 // WORKING
-void WriteData(double data[5][1000], int total) {
-    FILE *data_output;
-    int i = 0;
-
-    data_output = fopen("NJ_Project_data_out.txt", "r+");
-
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < total; j++) {
-            fprintf(data_output, "%f\n", data[i][j]);
-        }
-    }
-
-    fclose(data_output);
-}
-
-// WORKING
-// function to read data
+// function to read data from csv file to array
 int ReadData(double data[5][1000]) {
     int i, j, total, data_amount, bank_amount;
     total = 0;
@@ -140,7 +140,7 @@ int ReadData(double data[5][1000]) {
         }
     }
     data_amount = j;
-    WriteData(data, data_amount);
+    // WriteData(data, data_amount);
 
     printf("Number of data values read: 5 banks of %d\n", data_amount);
 
@@ -148,143 +148,88 @@ int ReadData(double data[5][1000]) {
     return data_amount;
 }
 
-int GetMinValue (FILE *data, int total) {
-    int i, j, h; 
-    double num;
+// WORKING
+// function to get minimum value of a bin
+int GetMinValue (int x, int total, double data[5][1000]) {
+    int i, j; 
+    double h;
+    j = i = 0;
 
-    data = fopen("NJ_Project_2_data.txt", "r");
-    if (data == NULL) {
-        printf("ERROR: File not found\n");
-    } else {
         while (j < total) {
-            fscanf(data, "%lf", &num);
             while (i == 0) {
-                h = num;
+                h = data[x][j];
                 i++;
             }
-            if (h > num) {
-                h = num;
+            if (h > data[x][j]) {
+                h = data[x][j];
             }
             j++;
         }
         printf("\nMinimum data point: %.2f", h);
-    }
-    fclose(data);
 
     return h;
 }
 
-int GetMaxValue (FILE *data, int total) {
-    int k, i, j; 
-    double num;
+// WORKING
+// function to get maximum value of a bin
+int GetMaxValue (int x, int total, double data[5][1000]) {
+    int i, j; 
+    double k;
+    j = i = 0;
 
-    data = fopen("NJ_Project_2_data.txt", "r");
-    if (data == NULL) {
-        printf("ERROR: File not found\n");
-    } else {
         while (j < total) {
-            fscanf(data, "%lf", &num);
             while (i == 0) {
-                k = num;
+                k = data[x][j];
                 i++;
             }
-            if (k < num) {
-                k = num;
+            if (k < data[x][j]) {
+                k = data[x][j];
             }
             j++;
         }
         printf("\nMaximum data point: %.2f", k);
-    }
-    fclose(data);
     
     return k;
 }
 
+// almost WORKING
 // function to calculate histogram
-double CalculateHistogram(int binCount, double data[5][1000]) {
-    double bin, range, min, max, data_frequency[5][20];
-    int k, j, i;
-    j = i = 0;
+double CalculateHistogram(int binCount, int total, double data[5][1000]) {
+    double bin, range, min, max;
+    int k, data_frequency[5][20];
 
+    for (int i = 0; i < 5; i++){
+        for (int j = 0; j < binCount; j++) {
+            data_frequency[i][j] = 0;
+        }
+    }
+
+    for (int i = 0; i < 5; i++) {
+        printf("\nBIN %d: ", i + 1);
+        
+        min = GetMinValue(i, total, data);
+        max = GetMaxValue(i, total, data);
         bin = (max - min)/(binCount);
         range = min;
+
         while (range <= max) {
             for (int k = 0; k < binCount; k++) {
-                for (j = 0; j < 100; j++) {
+                for (int j = 0; j < total; j++) {
                     if ((data[i][j] >= (range)) && (data[i][j] <= (range + bin))) {
                         data_frequency[i][k]++;
                     }
                 }
-                range = range + bin; 
-            // printf("data frequency %d: %d", k + 1, data_frequency[i][k]);
+                range = range + bin;
+                printf("\ndata frequency %d: %d\n", k + 1, data_frequency[i][k]);
             }
         }
-
-    // bin = (k - h)/(binCount);
-    // data0 = fopen("NJ_Project_1_data.txt", "r+");
-
-    // if (binCount == 12) {
-    //     range = h;
-    //     range1 = range + bin;
-    //     range2 = range1 + bin;
-    //     range3 = range2 + bin;
-    //     range4 = range3 + bin;
-    //     range5 = range4 + bin;
-    //     range6 = range5 + bin;
-    //     range7 = range6 + bin;
-    //     range8 = range7 + bin;
-    //     range9 = range8 + bin;
-    //     range10 = range9 + bin;
-    //     range11 = range10 + bin;
-    //     j = 0;
-
-    //     while (j < 100) {
-    //         fscanf(data, "%lf", &num);
-    //         if (num >= h && num <= range1) {
-    //             data_f++;
-    //         }
-    //         if (num >= range1 && num <= range2) {
-    //             data_f0++;
-    //         }
-    //         if (num >= range2 && num <= range3) {
-    //             data_f1++;
-    //         }
-    //         if (num >= range3 && num <= range4) {
-    //             data_f2++;
-    //         }
-    //         if (num >= range4 && num <= range5) {
-    //             data_f3++;
-    //         }
-    //         if (num >= range5 && num <= range6) {
-    //             data_f4++;
-    //         }
-    //         if (num >= range6 && num <= range7) {
-    //             data_f5++;
-    //         }
-    //         if (num >= range7 && num <= range8) {
-    //             data_f6++;
-    //         }
-    //         if (num >= range8 && num <= range9) {
-    //             data_f7++;
-    //         }
-    //         if (num >= range9 && num <= range10) {
-    //             data_f8++;
-    //         }
-    //         if (num >= range10 && num <= range11) {
-    //             data_f9++;
-    //         }
-    //         if (num >= range11 && num <= k) {
-    //             data_f10++;
-    //         }
-    //         j++;
-    //     }
-    // }
-    fclose(data0);
+    }
 
     return bin;
 }
 
 // WORKING
+// function to display paginated table of each bank's data values
 void DisplayData(double data[5][1000], int total) {    
     int j, k, t, counter;
     int i = 1;
@@ -522,7 +467,7 @@ void main() {
     double bin, data[5][1000], data_frequency[5][20];
     binCount = 12;
     esc = 1;
-    menuChoice = binCount = total = 0;
+    menuChoice = total = 0;
 
     while (esc == 1) {
         menuChoice = GetMenuChoice();
@@ -641,7 +586,7 @@ void main() {
                     break;
 
                     case 4: 
-                    bin = CalculateHistogram(binCount, data);
+                    bin = CalculateHistogram(binCount, total, data);
                     menuChoice = 0;
                     break;
 
