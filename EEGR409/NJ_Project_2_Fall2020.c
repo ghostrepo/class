@@ -166,15 +166,15 @@ int GetMaxValue (int x, int total, double data[5][1000]) {
             }
             j++;
         }
-        printf("\nMaximum data point: %.2f", k);
+        printf("\nMaximum data point: %.2f\n", k);
     
     return k;
 }
 
 // 
 // function to calculate histogram
-void CalculateHistogram(int binCount, int total, double data[5][1000], int data_frequency[5][20]) {
-    double bin[5], range, min[5], max[5];
+void CalculateHistogram(int binCount, int total, double bin[5], double data[5][1000], int data_frequency[5][20]) {
+    double range, min[5], max[5];
     // double bin, range, min, max;
     int i, k;
     double binCount_ = (double) binCount;
@@ -185,39 +185,13 @@ void CalculateHistogram(int binCount, int total, double data[5][1000], int data_
             data_frequency[i][j] = 0;
         }
     }
-
-    // printf("\nBIN %d: ", i+1);
     
-    // min = GetMinValue(i, total, data);
-    // max = GetMaxValue(i, total, data);
-    // bin = (max - min)/(binCount_);
-    // printf("\n%f\n", bin);
-    // range = min;
-
-    // // while ((range + bin) <= max) {
-    // for (int k = 0; k < binCount; k++) {
-    //     if (range <= max) {
-    //         for (int j = 0; j < total; j++) {
-    //             if (data[i][j] == (range) && range == min) {
-    //                     data_frequency[i][k]++;
-    //             }
-    //             if ((data[i][j] > (range)) && (data[i][j] <= (range + bin))) {
-    //                 data_frequency[i][k]++;
-    //             }
-    //         }
-    //         range = range + bin;
-    //         printf("\ndata frequency %d: %d\n", k + 1, data_frequency[i][k]);
-    //     }
-    // }
-    
-    // return bin;
     for (int i = 0; i < 5; i++) {
         printf("\nBIN %d: ", i + 1);
         
         min[i] = GetMinValue(i, total, data);
         max[i] = GetMaxValue(i, total, data);
         bin[i] = (max[i] - min[i])/(binCount_);
-        printf("\n%f\n", bin[i]);
         range = min[i];
 
         // while ((range + bin) <= max) {
@@ -306,8 +280,8 @@ void DisplayData(double data[5][1000], int total) {
 // function to display the graph
 void DisplayHistogram(int binCount, int data_frequency[5][20], double bin[5]) {
     double min, max;
-    int k, count, count0, looper;
-    int j = 0;
+    int k, j, count, count0, looper, x;
+    x = j = 0;
 
     // for (int i = 0; i < 5; i++){
     //     for (int j = 0; j < binCount; j++) {
@@ -317,30 +291,32 @@ void DisplayHistogram(int binCount, int data_frequency[5][20], double bin[5]) {
 
     printf("\t\t\tHEIGHT OF BLACK CHERRY TREES\t\t\t\n");
     printf("----------------------------------------------------------------------------------\n");
+    // BANK lOOP
     for (int j = 0; j < 5; j++) {
         printf("\nBank %d", j+1);
-        k = 1;
+        // BIN LOOP
         for (int i = 0; i < binCount; i++) {
+            k = 0;
             looper = 0;
-            // for (int k = 0; k < binCount; k++) {
-                if (looper == 0) {
-                    printf("\tB%d: ", k);
-                    count0 = count = data_frequency[j][i];
-                    looper++;
-                    // printf("\nlook: %d\n", count);
-                }
-                while (count != 0) {
-                   printf("*");
-                    count--;
-                }
-                if (count == 0) {
-                    printf(" (%d)\n\n", count0);
-                    k++;
-                }
-            // }
+            x = 0;
+            // for (int k = 0; k < 5; k++) {
+            if (looper == 0) {
+                printf("\tB%d: ", k + 1);
+                count0 = count = data_frequency[j][i + k];
+                looper++;
+                // printf("\nlook: %d\n", count);
+            }
+            while (count != 0) {
+                printf("*");
+                count--;
+            }
+            if (count == 0) {
+                printf(" (%d)\n\n", count0);
+            }
         }
     }
 }
+
  
 // WORKING
 // function to exit the program
@@ -357,6 +333,10 @@ void main() {
     binCount = 12;
     esc = 1;
     menuChoice = total = 0;
+
+    for (int i = 0; i < 5; i++) {
+        bin[i] = 0;
+    }
 
     while (esc == 1) {
         menuChoice = GetMenuChoice();
@@ -479,13 +459,13 @@ void main() {
                         printf("ERROR: Must Load Data\n");
                         menuChoice = 0;
                     } else {
-                        CalculateHistogram(binCount, total, data, data_frequency);
+                        CalculateHistogram(binCount, total, bin, data, data_frequency);
                         menuChoice = 0;
                     }
                     break;
 
                     case 5:
-                    if (bin[1] == 0) {
+                    if (bin[0] == 0) {
                         printf("ERROR: Must Calculate Histogram\n");
                         menuChoice = 0;
                     } else {
