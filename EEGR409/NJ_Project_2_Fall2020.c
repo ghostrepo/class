@@ -171,14 +171,11 @@ int GetMaxValue (int x, int total, double data[5][1000]) {
     return k;
 }
 
-// 
+// WORKING
 // function to calculate histogram
 void CalculateHistogram(int binCount, int total, double bin[5], double data[5][1000], int data_frequency[5][20]) {
     double range, min[5], max[5];
-    // double bin, range, min, max;
-    int i, k;
     double binCount_ = (double) binCount;
-    i = 0;
 
     for (int i = 0; i < 5; i++){
         for (int j = 0; j < binCount; j++) {
@@ -194,7 +191,6 @@ void CalculateHistogram(int binCount, int total, double bin[5], double data[5][1
         bin[i] = (max[i] - min[i])/(binCount_);
         range = min[i];
 
-        // while ((range + bin) <= max) {
         for (int k = 0; k < binCount; k++) {
             if (range <= max[i]) {
                 for (int j = 0; j < total; j++) {
@@ -280,38 +276,55 @@ void DisplayData(double data[5][1000], int total) {
 // function to display the graph
 void DisplayHistogram(int binCount, int data_frequency[5][20], double bin[5]) {
     double min, max;
-    int k, j, count, count0, looper, x;
-    x = j = 0;
+    int count, k, looper;
 
-    // for (int i = 0; i < 5; i++){
-    //     for (int j = 0; j < binCount; j++) {
-    //         printf("%d\n", data_frequency[i][j]);
-    //     }
-    // }
+    printf("\t\t\t\t\t\tHEIGHT OF BLACK CHERRY TREES\t\t\t\t\t\t\n");
+    printf("------------------------------------------------------------------------------------------------------------------------------\n");
 
-    printf("\t\t\tHEIGHT OF BLACK CHERRY TREES\t\t\t\n");
-    printf("----------------------------------------------------------------------------------\n");
-    // BANK lOOP
-    for (int j = 0; j < 5; j++) {
-        printf("\nBank %d", j+1);
-        // BIN LOOP
-        for (int i = 0; i < binCount; i++) {
-            k = 0;
+    for (int j = 0; j < binCount; j++) {
+        printf("\nBIN %d", j+1);
+
+        for (int i = 0; i < 5; i++) {
             looper = 0;
-            x = 0;
-            // for (int k = 0; k < 5; k++) {
+
             if (looper == 0) {
-                printf("\tB%d: ", k + 1);
-                count0 = count = data_frequency[j][i + k];
+                printf("\tB%d: ", i + 1);
+                k = count = data_frequency[i][j];
                 looper++;
-                // printf("\nlook: %d\n", count);
             }
             while (count != 0) {
-                printf("*");
+                switch (i) {
+                    case 0:
+                    printf("%c", 177);
+                    break;
+
+                    case 1:
+                    printf("%c", 219);
+                    break;
+
+                    case 2:
+                    printf("%c", 176);
+                    break;
+
+                    case 3:
+                    printf("%c", 178);
+                    break;
+                    
+                    case 4:
+                    printf("%c", 177);
+                    break;
+
+                    default:
+                    break;
+                }
                 count--;
             }
             if (count == 0) {
-                printf(" (%d)\n\n", count0);
+                if (k != 0) {
+                    printf(" (%d)\n\n", k);
+                } else {
+                    printf("\n\n");
+                }
             }
         }
     }
