@@ -13,8 +13,8 @@
 // WORKING
 // function to display the main menu 
 int GetMenuChoice() {
-    int x, menuChoice, binCount;
-    x = 0;
+    int menuChoice, binCount;
+    int x = 0;
     printf("\n+---------------------------------------+\n");
     printf("| \t\tMAIN MENU\t\t| \n");
     printf("+---------------------------------------+\n");
@@ -61,13 +61,13 @@ int GetNumberOfBins() {
             binCount = 6;
             printf("Number of bins set to %d\n", binCount);
             x = 1;
-            break; 
+            break;
 
             case 3:
             binCount = 12;
             printf("Number of bins set to %d\n", binCount);
             x = 1;
-            break; 
+            break;
 
             case 4:
             while (t == 0) {
@@ -78,23 +78,23 @@ int GetNumberOfBins() {
                 }
                 if (var == 0 || binCount > 20 || binCount < 1) {
                     fflush(stdin);
-                    printf("INVALID ENTRY\n"); 
+                    printf("INVALID ENTRY\n");
                     continue;
                 }
             }
 
             printf("Number of bins set to %d\n", binCount);
             x = 1;
-            break; 
+            break;
 
             case 5:
             binCount = 12;
             printf("Number of bins set to %d\n", binCount);
             x = 1;
-            break; 
+            break;
 
             default:
-            printf("INVALID CHOICE: Please enter a choice between 1 and 4\n");
+            printf("INVALID CHOICE: Please enter a choice between 1 and 5\n");
         }
     }
 
@@ -104,9 +104,8 @@ int GetNumberOfBins() {
 // WORKING
 // function to read data from csv file to array
 int ReadData(double data[5][1000]) {
-    int i, j, total, data_amount, bank_amount;
-    total = 0;
-    i = j = 0;
+    int j, total, data_amount, bank_amount;
+    total = j = 0;
 
     FILE *data_file = fopen("NJ_Project_2_data.csv", "r+");
     if (data_file == NULL) {
@@ -119,7 +118,6 @@ int ReadData(double data[5][1000]) {
         }
     }
     data_amount = j;
-    // WriteData(data, data_amount);
 
     printf("Number of data values read: 5 banks of %d\n", data_amount);
 
@@ -130,7 +128,7 @@ int ReadData(double data[5][1000]) {
 // WORKING
 // function to get minimum value of a bin
 int GetMinValue (int x, int total, double data[5][1000]) {
-    int i, j; 
+    int i, j;
     double h;
     j = i = 0;
 
@@ -152,7 +150,7 @@ int GetMinValue (int x, int total, double data[5][1000]) {
 // WORKING
 // function to get maximum value of a bin
 int GetMaxValue (int x, int total, double data[5][1000]) {
-    int i, j; 
+    int i, j;
     double k;
     j = i = 0;
 
@@ -174,10 +172,10 @@ int GetMaxValue (int x, int total, double data[5][1000]) {
 // WORKING
 // function to calculate histogram
 void CalculateHistogram(int binCount, int total, double bin[5], double data[5][1000], int data_frequency[5][20]) {
-    double range, min[5], max[5];
-    double binCount_ = (double) binCount;
+    double range, min[5], max[5], binCount_;
+    binCount_ = (double) binCount;
 
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 5; i++) {
         for (int j = 0; j < binCount; j++) {
             data_frequency[i][j] = 0;
         }
@@ -194,15 +192,15 @@ void CalculateHistogram(int binCount, int total, double bin[5], double data[5][1
         for (int k = 0; k < binCount; k++) {
             if (range <= max[i]) {
                 for (int j = 0; j < total; j++) {
-                    if (data[i][j] == (range) && range == min[i]) {
-                            data_frequency[i][k]++;
+                    if (data[i][j] == range && range == min[i]) {
+                        data_frequency[i][k]++;
                     }
-                    if ((data[i][j] > (range)) && (data[i][j] <= (range + bin[i]))) {
+                    if ((data[i][j] > range && data[i][j] <= (range + bin[i]))) {
                         data_frequency[i][k]++;
                     }
                 }
-                range = range + bin[i];
-                // printf("\ndata frequency %d: %d\n", k + 1, data_frequency[i][k]);
+                range += bin[i];
+                printf("\ndata frequency %d: %d\n", k, data_frequency[i][k]);
             }
         }
     }
@@ -210,7 +208,7 @@ void CalculateHistogram(int binCount, int total, double bin[5], double data[5][1
 
 // WORKING
 // function to display paginated table of each bank's data values
-void DisplayData(double data[5][1000], int total) {    
+void DisplayData(double data[5][1000], int total) {
     int j, k, t, counter;
     int i = 1;
     char page;
@@ -242,8 +240,7 @@ void DisplayData(double data[5][1000], int total) {
                         printf("ERROR: Cannot go back from this point\n");
                     } else {
                         j = j - 24;
-                        i = 1;
-                        t = 1;
+                        i = t = 1;
                     }
                     break;
 
@@ -251,8 +248,7 @@ void DisplayData(double data[5][1000], int total) {
                     if (j == 108) {
                         printf("ERROR: Cannot go beyond this point\n");
                     } else {
-                        i = 1;
-                        t = 1;
+                        i = t = 1;
                     }
                     break;
 
@@ -262,17 +258,18 @@ void DisplayData(double data[5][1000], int total) {
 
                     default:
                     printf("\nERROR: False input or program error\n");
-                    break;            
+                    break;
                 }
             } else {
                 fflush(stdin);
-                printf("INVALID ENTRY: Press Enter to Continue\n"); 
+                printf("INVALID ENTRY: Press Enter to Continue\n");
                 continue;
             }
         }
     }
 }
 
+// WORKING
 // function to display the graph
 void DisplayHistogram(int binCount, int data_frequency[5][20], double bin[5]) {
     double min, max;
@@ -283,7 +280,6 @@ void DisplayHistogram(int binCount, int data_frequency[5][20], double bin[5]) {
 
     for (int j = 0; j < binCount; j++) {
         printf("\nBIN %d", j+1);
-
         for (int i = 0; i < 5; i++) {
             looper = 0;
 
@@ -309,7 +305,7 @@ void DisplayHistogram(int binCount, int data_frequency[5][20], double bin[5]) {
                     case 3:
                     printf("%c", 178);
                     break;
-                    
+
                     case 4:
                     printf("%c", 177);
                     break;
@@ -330,7 +326,6 @@ void DisplayHistogram(int binCount, int data_frequency[5][20], double bin[5]) {
     }
 }
 
- 
 // WORKING
 // function to exit the program
 void exitMenu() {
@@ -343,9 +338,9 @@ void main() {
 
     int menuChoice, binCount, esc, total, data_frequency[5][20];
     double bin[5], max[5], min[5], data[5][1000];
+    menuChoice = total = 0;
     binCount = 12;
     esc = 1;
-    menuChoice = total = 0;
 
     for (int i = 0; i < 5; i++) {
         bin[i] = 0;
@@ -360,8 +355,8 @@ void main() {
         }
         while (menuChoice >= 1 && menuChoice <= 6 ) {
             if (menuChoice >= 1 && menuChoice <= 6) {
-                switch (menuChoice) {           
-                    case 1: 
+                switch (menuChoice) {
+                    case 1:
                     binCount = GetNumberOfBins(menuChoice);
                     switch (binCount) {
                         case 1:
@@ -375,52 +370,52 @@ void main() {
                         case 3:
                         menuChoice = 0;
                         break;
-                        
+
                         case 4:
                         menuChoice = 0;
                         break;
-                        
+
                         case 5:
                         menuChoice = 0;
                         break;
-                        
+
                         case 6:
                         menuChoice = 0;
                         break;
-                        
+
                         case 7:
                         menuChoice = 0;
                         break;
-                        
+
                         case 8:
                         menuChoice = 0;
                         break;
-                        
+
                         case 9:
                         menuChoice = 0;
                         break;
-                        
+
                         case 10:
                         menuChoice = 0;
                         break;
-                        
+
                         case 11:
                         menuChoice = 0;
                         break;
-                        
+
                         case 12:
                         menuChoice = 0;
                         break;
-                        
+
                         case 13:
                         menuChoice = 0;
                         break;
-                        
+
                         case 14:
                         menuChoice = 0;
                         break;
 
-                        case 15: 
+                        case 15:
                         menuChoice = 0;
                         break;
 
@@ -431,11 +426,11 @@ void main() {
                         case 17:
                         menuChoice = 0;
                         break;
-                        
+
                         case 18:
                         menuChoice = 0;
                         break;
-                        
+
                         case 19:
                         menuChoice = 0;
                         break;
@@ -446,6 +441,7 @@ void main() {
 
                         case 0:
                         menuChoice = 0;
+                        break;
 
                         default:
                         break;
@@ -467,7 +463,7 @@ void main() {
                     }
                     break;
 
-                    case 4: 
+                    case 4:
                     if (total == 0) {
                         printf("ERROR: Must Load Data\n");
                         menuChoice = 0;
@@ -483,37 +479,19 @@ void main() {
                         menuChoice = 0;
                     } else {
                         DisplayHistogram(binCount, data_frequency, bin);
-                        menuChoice = 0;
-                        esc = 0;
+                        menuChoice = esc = 0;
                     }
                     break;
 
                     case 6:
                     exitMenu();
-                    menuChoice = 0;
-                    esc = 0;
+                    menuChoice = esc = 0;
                     break;
 
                     default:
-                    break;                
+                    break;
                 }
             } 
         }
     }
 }
-
-// // WORKING
-// void WriteData(double data[5][1000], int total) {
-//     FILE *data_output;
-//     int i = 0;
-
-//     data_output = fopen("NJ_Project_data_out.txt", "r+");
-
-//     for (int i = 0; i < 5; i++) {
-//         for (int j = 0; j < total; j++) {
-//             fprintf(data_output, "%f\n", data[i][j]);
-//         }
-//     }
-
-//     fclose(data_output);
-// }
