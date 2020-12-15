@@ -197,9 +197,9 @@ void CalculateHistogram(int binCount, int total, double bin[5], double data[5][1
 
             if (range[1][i] <= max[i]) {
                 for (int j = 0; j < total; j++) {
-                    if (data[i][j] == range[0][i] && range[0][i] == min[i]) {
+                    if (data[i][j] == range[1][i] && range[1][i] == max[i]) {
                         data_frequency[i][k]++;
-                    } else if (data[i][j] > range[0][i] && data[i][j] <= range[1][i]) {
+                    } else if (data[i][j] >= range[0][i] && data[i][j] < range[1][i]) {
                         data_frequency[i][k]++;
                     }
                 }
